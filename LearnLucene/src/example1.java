@@ -55,11 +55,11 @@ public class example1 {
             int id = hits[i].doc;
             Document doc = searcher.doc(id);
 
-            System.out.println("(%s). %s \t \"%s\"".formatted(
-                    i + 1,
+            System.out.printf(
+                    "(%s). %s \t \"%s\"%n", i + 1,
                     doc.get("title"),
                     doc.get("text")
-            ));
+            );
         }
     }
 
