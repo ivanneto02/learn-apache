@@ -27,11 +27,12 @@ public class example2 {
     public static void main(String[] args) throws IOException, ParseException, CsvException {
 
         // Maximum character limit in cells
-        int cellCharMax = 30;
+        int cellCharMax = 10;
         int nRows = 5;
+        int hitsPerPage = 10;
 
         // Read csv file
-        List<String[]> lines = readCsv("./LearnLucene/src/assets/harry_potter/titles.csv");
+        List<String[]> lines = readCsv("./LearnLucene/src/assets/pitt/pitt-dataset.csv").subList(0, 3000);
 
         // Print the data set
         printRows(lines, cellCharMax, nRows);
@@ -54,12 +55,12 @@ public class example2 {
         writer.close();
 
         // Create query string
-        String queryStr = args.length > 0 ? args[0] : "wand harry";
+        String queryStr = args.length > 0 ? args[0] : "consult";
+
         // Create actual query
-        Query query = new QueryParser("Title", analyzer).parse(queryStr);
+        Query query = new QueryParser("type_patient", analyzer).parse(queryStr);
 
         // Create search
-        int hitsPerPage = 20;
         IndexReader reader = DirectoryReader.open(index); // Create IndexReader
         IndexSearcher searcher = new IndexSearcher(reader); // Create IndexSearcher
         TopDocs topDocs = searcher.search(query, hitsPerPage);
@@ -78,9 +79,10 @@ public class example2 {
             }
 
             System.out.printf(
-                    "%s \t \"%s\"%n",
-                    doc.get("Title"),
-                    doc.get("Languages")
+                    "%s \t \"%s\" %s %n",
+                    doc.get("chief_comp"),
+                    doc.get("code"),
+                    doc.get("body")
             );
         }
 

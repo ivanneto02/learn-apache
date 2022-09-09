@@ -32,15 +32,15 @@ public class example1 {
         //    given index and configuration based on the analyzer.
         IndexWriter writer = new IndexWriter(index, config);
 
-        addDoc(writer, "hello_world", "I am writing this to say hello to the world");
-        addDoc(writer, "goodbye_world", "I am writing this to say goodbye to the entire world.");
-        addDoc(writer, "phone", "The phone is an amazing creation that has been made possible by unbelievable human strides.");
+        addDoc(writer, "Hello World", "I am writing this to say hello to the world");
+        addDoc(writer, "Goodbye World", "I am writing this to say goodbye to the entire world.");
+        addDoc(writer, "Phones", "The phone is an amazing creation that has been made possible by unbelievable human strides.");
 
         // Close the writer once we are done.
         writer.close();
 
         // Create query string
-        String queryStr = args.length > 0 ? args[0] : "phone";
+        String queryStr = args.length > 0 ? args[0] : "phone amazon create, crazy";
         // Create actual query
         Query query = new QueryParser("text", analyzer).parse(queryStr);
 
